@@ -17,7 +17,7 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const { email, password } = createUserDto;
+    const { email, password, role } = createUserDto;
 
     // 1. Provjera postoji li korisnik
     const existingUser = await this.userRepository.findOne({
@@ -35,6 +35,7 @@ export class UsersService {
     const newUser = this.userRepository.create({
       email,
       password: hashedPassword,
+      role,
     });
 
     // 4. Spremanje

@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   async login(user: any) {
-    const payload = { userId: user.id }; // Payload s korisničkim ID-jem
+    const payload = { userId: user.id, role: user.role }; // Payload s korisničkim ID-jem i rolom
     const token = this.jwtService.sign(payload); // Generiraj JWT token
     return { message: 'Login successful', token };
   }

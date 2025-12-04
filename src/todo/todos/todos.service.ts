@@ -22,6 +22,12 @@ export class TodosService {
   }
 
   async findAllForUser(userId: number) {
+    const user = await this.usersService.findOneById(userId);
+
+    if (user.role === 'admin') {
+      return this.todosRepository.find();
+    }
+
     return this.todosRepository.find({
       where: { user: { id: userId } },
     });
